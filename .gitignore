@@ -52,3 +52,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.idea/battle.iml
+.idea/misc.xml
+.idea/workspace.xml
+.idea/modules.xml
+classes/__pycache__/game.cpython-36.pyc
