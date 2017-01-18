@@ -57,3 +57,4 @@ $RECYCLE.BIN/
 .idea/workspace.xml
 .idea/modules.xml
 classes/__pycache__/game.cpython-36.pyc
+classes/__pycache__/__init__.cpython-36.pyc
