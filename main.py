@@ -8,7 +8,7 @@ meteor= Spell("Meteor",20, 200,"black magic")
 quake= Spell("Quake",14, 140,"black magic")
 
 # Instantiating white magic
-cure= Spell("Cure",12,120,"White")
+cure= Spell("Cure",12,120,"White Magic")
 cura= Spell("Cura",18,200, "White Magic")
 # Instantiating people
 player =Person(460,65,60,34,[fire,thunder,blizzard,meteor,cura])
@@ -41,9 +41,13 @@ while running:
                 print(bcolors.FAIL +"\n N ot enough Magic points" +bcolors.ENDC)
                 continue
 
-            player.reduce_mp(spell.cost)
-            enemy.take_damage(magic_dmg)
-            print(bcolors.OKBLUE + "\n" + spell.name + " deals " + str(magic_dmg), " points of damage" + bcolors.ENDC)
+            if spell.type  == "White Magic":
+                player.heal(magic_dmg)
+                print(bcolors.OKBLUE + "\n" + spell.name +"Heals " + str(magic_dmg) + " HP" + bcolors.ENDC )
+            elif spell.type ==  "Black Magic":
+                player.reduce_mp(spell.cost)
+                enemy.take_damage(magic_dmg)
+                print(bcolors.OKBLUE + "\n" + spell.name + " deals " + str(magic_dmg), " points of damage" + bcolors.ENDC)
 
 
 
