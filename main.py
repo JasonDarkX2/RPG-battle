@@ -1,13 +1,16 @@
 from classes.game  import  Person, bcolors
 from classes.magic import Spell
+# Instantiating black magic
 fire= Spell("Fire",10, 160,"black")
 thunder= Spell("Thunder",10, 100,"black magic")
 blizzard= Spell("Blizzard",10, 100,"black magic")
 meteor= Spell("Meteor",20, 200,"black magic")
 quake= Spell("Quake",14, 140,"black magic")
 
+# Instantiating white magic
 cure= Spell("Cure",12,120,"White")
 cura= Spell("Cura",18,200, "White Magic")
+# Instantiating people
 player =Person(460,65,60,34,[fire,thunder,blizzard,meteor,cura])
 enemy=Person(1200,65,45,25,[])
 
