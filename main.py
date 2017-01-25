@@ -13,16 +13,19 @@ cure= Spell("Cure",12,120,"White Magic",)
 cura= Spell("Cura",18,200, "White Magic",)
 
 #instantiating items
-potion= Item("Potion","potion", "heals 50 HP", 50)
+potion= Item( "Potion","potion", "heals 50 HP", 50)
 highPotion= Item("High Potion","potion", "heals 100 HP", 100)
 superPotion= Item(" Super Potion","potion", "heals 500 HP", 500)
-elixer= potion= Item("Elixer","elixer", " Fully restore one party member   HP/MP", 50000)
-highElixer= Item(" High elixer","elixer", " Fully restore  partys   HP/MP", 90000)
+elixer= potion= Item("Elixer","elixer", " Fully restore one party member  HP/MP", 50000)
+highElixer= Item(" High elixer","elixer", " Fully restore  partys  HP/MP", 90000)
 grenade = Item("Grenade", "attack", "deals 500 damage", 500)
 
 # Instantiating people
 player_magic = [fire,thunder,blizzard,meteor,cura]
-player_item =[potion,highPotion,superPotion, elixer, highElixer,grenade]
+player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
+                          {"item": superPotion, "qty": 5}, {"item":elixer,"qty": 5},
+                          {"item":highElixer, "qty":5},{"item":grenade, "qty": 2}
+                         ]
 player =Person(460,65,60,34,player_magic,player_item)
 enemy=Person(1200,65,45,25,[],[])
 
@@ -68,7 +71,11 @@ while running:
          item_choice= int(input( "choose item:" ))  - 1
          if item_choice == -1:
              continue
-         item= player.item[item_choice]
+         item= player.item[item_choice]["item"]
+         if player.item[item_choice]["qty"] <=0:
+             print(bcolors.FAIL+ "\n"+" None Left....."+bcolors.ENDC)
+             continue
+         player.item[item_choice]["qty"] -= 1
          if item.type =="potion":
              player.heal(item.prop)
              print (bcolors.OKGREEN +"\n" + item.name + " heals " + str(item.prop) + "HP" + bcolors.ENDC)
