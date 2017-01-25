@@ -2,11 +2,11 @@ from classes.game  import  Person, bcolors
 from classes.magic import Spell
 from classes.inventory import Item
 # Instantiating black magic
-fire= Spell("Fire",10, 160,"black")
-thunder= Spell("Thunder",10, 100,"black magic")
-blizzard= Spell("Blizzard",10, 100,"black magic")
-meteor= Spell("Meteor",20, 200,"black magic")
-quake= Spell("Quake",14, 140,"black magic")
+fire= Spell("Fire",10, 160,"Black Magic")
+thunder= Spell("Thunder",10, 100,"Black Magic")
+blizzard= Spell("Blizzard",10, 100,"Black Magic")
+meteor= Spell("Meteor",20, 200,"Black Magic")
+quake= Spell("Quake",14, 140,"Black Magic")
 
 # Instantiating white magic
 cure= Spell("Cure",12,120,"White Magic",)
@@ -52,11 +52,12 @@ while running:
 
             current_mp= player.get_mp()
             if spell.cost > current_mp:
-                print(bcolors.FAIL +"\n N ot enough Magic points" +bcolors.ENDC)
+                print(bcolors.FAIL +"\n Not enough Magic points" +bcolors.ENDC)
                 continue
 
             if spell.type  == "White Magic":
                 player.heal(magic_dmg)
+                player.reduce_mp(spell.cost)
                 print(bcolors.OKBLUE + "\n" + spell.name +" heals  " + str(magic_dmg) + "  HP " + bcolors.ENDC )
             elif spell.type ==  "Black Magic":
                 player.reduce_mp(spell.cost)
@@ -70,7 +71,15 @@ while running:
          item= player.item[item_choice]
          if item.type =="potion":
              player.heal(item.prop)
-             print (bcolors.OKGREEN +"\n" + item.name + "heals " + str(item.prop) + "HP" + bcolors.ENDC)
+             print (bcolors.OKGREEN +"\n" + item.name + " heals " + str(item.prop) + "HP" + bcolors.ENDC)
+         elif item.type == "elixer":
+             player.hp= player.maxhp
+             player.mp =player.maxmp
+             print(bcolors.OKGREEN + "\n" + item.name + " fully restores HP/MP" + bcolors.ENDC)
+         elif item.type =="attack":
+             enemy.take_damage(item.prop)
+             print(bcolors.FAIL + "\n" + item.name + "  deals ",str(item.prop) , "points of damage"+ bcolors.ENDC)
+
 
 
 
