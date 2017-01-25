@@ -1,5 +1,6 @@
 from classes.game  import  Person, bcolors
 from classes.magic import Spell
+from classes.inventory import Item
 # Instantiating black magic
 fire= Spell("Fire",10, 160,"black")
 thunder= Spell("Thunder",10, 100,"black magic")
@@ -8,11 +9,22 @@ meteor= Spell("Meteor",20, 200,"black magic")
 quake= Spell("Quake",14, 140,"black magic")
 
 # Instantiating white magic
-cure= Spell("Cure",12,120,"White Magic")
-cura= Spell("Cura",18,200, "White Magic")
+cure= Spell("Cure",12,120,"White Magic",)
+cura= Spell("Cura",18,200, "White Magic",)
+
+#instantiating items
+potion= Item("Potion","potion", "heals 50 HP", 50)
+highPotion= Item("High Potion","potion", "heals 100 HP", 100)
+superPotion= Item(" Super Potion","potion", "heals 500 HP", 500)
+elixer= potion= Item("Elixer","elixer", " Fully restore one party member   HP/MP", 50000)
+highElixer= Item(" High elixer","elixer", " Fully restore  partys   HP/MP", 90000)
+grenade = Item("Grenade", "attack", "deals 500 damage", 500)
+
 # Instantiating people
-player =Person(460,65,60,34,[fire,thunder,blizzard,meteor,cura])
-enemy=Person(1200,65,45,25,[])
+player_magic = [fire,thunder,blizzard,meteor,cura]
+player_item =[potion,highPotion,superPotion, elixer, highElixer,grenade]
+player =Person(460,65,60,34,player_magic,player_item)
+enemy=Person(1200,65,45,25,[],[])
 
 
 
@@ -32,6 +44,8 @@ while running:
      elif  index  ==1 :
             player.choose_magic()
             magic_choice= int(input("Choose Magic:"))  - 1
+            if magic_choice == -1:
+                continue
             spell=  player.magic[magic_choice]
             magic_dmg = spell.generate_spell_damage()
 
@@ -43,11 +57,21 @@ while running:
 
             if spell.type  == "White Magic":
                 player.heal(magic_dmg)
-                print(bcolors.OKBLUE + "\n" + spell.name +"Heals " + str(magic_dmg) + " HP" + bcolors.ENDC )
+                print(bcolors.OKBLUE + "\n" + spell.name +" heals  " + str(magic_dmg) + "  HP " + bcolors.ENDC )
             elif spell.type ==  "Black Magic":
                 player.reduce_mp(spell.cost)
                 enemy.take_damage(magic_dmg)
                 print(bcolors.OKBLUE + "\n" + spell.name + " deals " + str(magic_dmg), " points of damage" + bcolors.ENDC)
+     elif index == 2:
+         player.choose_item()
+         item_choice= int(input( "choose item:" ))  - 1
+         if item_choice == -1:
+             continue
+         item= player.item[item_choice]
+         if item.type =="potion":
+             player.heal(item.prop)
+             print (bcolors.OKGREEN +"\n" + item.name + "heals " + str(item.prop) + "HP" + bcolors.ENDC)
+
 
 
 
