@@ -70,11 +70,11 @@ while running:
                 if spell.type  == "White Magic":
                     player.heal(magic_dmg)
                     player.reduce_mp(spell.cost)
-                    print(bcolors.OKBLUE + "\n" +player.name + spell.name +" heals  " + str(magic_dmg) + "  HP " + bcolors.ENDC )
+                    print(bcolors.OKBLUE + player.name + spell.name +" heals  " + str(magic_dmg) + "  HP " + bcolors.ENDC )
                 elif spell.type ==  "Black Magic":
                     player.reduce_mp(spell.cost)
                     enemy.take_damage(magic_dmg)
-                    print(bcolors.OKBLUE + "\n" + player.name+ spell.name + " deals " + str(magic_dmg), " points of damage" + bcolors.ENDC)
+                    print(bcolors.OKBLUE +   player.name+ spell.name + " deals " + str(magic_dmg), " points of damage" + bcolors.ENDC)
          elif index == 2:
              player.choose_item()
              item_choice= int(input( "choose item:" ))  - 1
@@ -91,10 +91,10 @@ while running:
              elif item.type == "elixer":
                  player.hp= player.maxhp
                  player.mp =player.maxmp
-                 print(bcolors.OKGREEN + "\n" + item.name + " fully restores HP/MP" + bcolors.ENDC)
+                 print(bcolors.OKGREEN + player.name + item.name + " fully restores HP/MP" + bcolors.ENDC)
              elif item.type =="attack":
                  enemy.take_damage(item.prop)
-                 print(bcolors.FAIL + "\n" + item.name + "  deals ",str(item.prop) , "points of damage"+ bcolors.ENDC)
+                 print(bcolors.FAIL +player.name+ item.name + "  deals ",str(item.prop) , "points of damage"+ bcolors.ENDC)
 
 
 
