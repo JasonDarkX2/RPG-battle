@@ -12,7 +12,8 @@ class bcolors:
 
 
 class Person:
-    def __init__(self, hp,mp,atk,df,magic, items):
+    def __init__(self, name,hp,mp,atk,df,magic, items):
+            self.name=name
             self.maxhp=hp
             self.hp=hp
             self.maxmp=mp
@@ -65,22 +66,30 @@ class Person:
 
     def choose_action(self):
         i = 1
-        print("\n" + bcolors.OKBLUE +  bcolors.BOLD + "ACTION" + bcolors.ENDC)
+        print( "     "+bcolors.BOLD +self.name + bcolors.ENDC + "\n"+ bcolors.OKBLUE +  bcolors.BOLD + "     ACTION" + bcolors.ENDC)
         for item in self.actions:
-            print("     "+ str(i) + ".", item)
+            print("         "+ str(i) + ".", item)
             i += 1
 
     def choose_magic(self):
         i = 1
-        print("\n" + bcolors.OKBLUE +"MAGIC" +bcolors.ENDC)
+        print("     "+bcolors.BOLD +self.name + bcolors.ENDC + "\n"+  bcolors.OKBLUE +"      MAGIC" +bcolors.ENDC)
         for spell in self.magic:
-            print("     "+str(i) + ".", spell.name, "(cost:", str(spell.cost) + ")")
+            print("         "+str(i) + ".", spell.name, "(cost:", str(spell.cost) + ")")
             i += 1
     def choose_item(self):
         i = 1
-        print( "\n" + bcolors.OKGREEN + "ITEMS" + bcolors.ENDC)
+        print( "     "+bcolors.BOLD +self.name + bcolors.ENDC + "\n"+ bcolors.OKGREEN + "      ITEMS" + bcolors.ENDC)
         for item in self.item:
-            print("     "+str(i) + ":", item["item"].name, ":", item["item"].description, "(x"+str(item["qty"])+ ")")
+            print("         "+str(i) + ":", item["item"].name, ":", item["item"].description, "(x"+str(item["qty"])+ ")")
             i += 1
+    def get_stats( self):
+
+        print(
+        "                                         ________________________________                            _____________")
+        print(
+                    self.name + bcolors.BOLD + "         "+str(self.hp)+"/"+ str(self.maxhp) + bcolors.ENDC +
+                    "|" + bcolors.OKGREEN + "█████████████████████████" + bcolors.ENDC + "|" +
+                    bcolors.BOLD + "               "+ str(self.mp)+"/"+ str(self.maxmp) + bcolors.ENDC + "|" + bcolors.OKBLUE + "██████████" + bcolors.ENDC + "|")
 
 
