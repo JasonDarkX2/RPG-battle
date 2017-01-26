@@ -47,6 +47,7 @@ class Person:
 
     def get_mp(self):
         return self.mp
+
     def get_max_hp(self):
         return self.maxhp
 
@@ -79,7 +80,7 @@ class Person:
         i = 1
         print( "\n" + bcolors.OKGREEN + "ITEMS" + bcolors.ENDC)
         for item in self.item:
-            print("     "+str(i) + ":", item.name, ":", item.description, "(x5)")
+            print("     "+str(i) + ":", item["item"].name, ":", item["item"].description, "(x"+str(item["qty"])+ ")")
             i += 1
 
 
