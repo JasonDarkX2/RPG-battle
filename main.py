@@ -52,7 +52,7 @@ while running:
          if index ==0:
                 dmg=player.generate_damage()
                 enemy.take_damage(dmg)
-                print (player.name+" attacked deals", dmg, "points of damage.")
+                print (player.name+" attack deals", dmg, "points of damage.")
          elif  index  ==1 :
                 player.choose_magic()
                 magic_choice= int(input("Choose Magic:"))  - 1
@@ -95,6 +95,7 @@ while running:
              elif item.type =="attack":
                  enemy.take_damage(item.prop)
                  print(bcolors.FAIL +player.name+ item.name + "  deals ",str(item.prop) , "points of damage"+ bcolors.ENDC)
+         print("______________________________________")
 
 
 
@@ -104,6 +105,7 @@ while running:
      enemy_dmg = enemy.generate_damage()
      player1.take_damage(enemy_dmg)
      print("Enemy attack dealt", enemy_dmg, "points of damage" )
+     print("enemy HP: "+bcolors.FAIL +str(enemy.hp)+ bcolors.ENDC+"/" + bcolors.FAIL + str(enemy.maxhp)+ bcolors.ENDC)
      if enemy.get_hp() == 0:
          print(bcolors.OKGREEN +"You Win!!" +bcolors.ENDC)
          running=False
