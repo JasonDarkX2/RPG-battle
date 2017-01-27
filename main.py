@@ -4,14 +4,14 @@ from classes.inventory import Item
 
 # Instantiating black magic
 fire= Spell("Fire",10, 160,"Black Magic")
-thunder= Spell("Thunder",10, 100,"Black Magic")
-blizzard= Spell("Blizzard",10, 100,"Black Magic")
-meteor= Spell("Meteor",20, 200,"Black Magic")
+thunder= Spell("Thunder",30, 100,"Black Magic")
+blizzard= Spell("Blizzard",30, 100,"Black Magic")
+meteor= Spell("Meteor",40, 200,"Black Magic")
 quake= Spell("Quake",14, 140,"Black Magic")
 
 # Instantiating white magic
-cure= Spell("Cure",12,120,"White Magic",)
-cura= Spell("Cura",18,200, "White Magic",)
+cure= Spell("Cure",52,120,"White Magic",)
+cura= Spell("Cura",38,200, "White Magic",)
 
 #instantiating items
 potion= Item( "Potion","potion", "heals 50 HP", 50)
@@ -27,11 +27,11 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
                           {"item": superPotion, "qty": 5}, {"item":elixer,"qty": 5},
                           {"item":highElixer, "qty":5},{"item":grenade, "qty": 2}
                          ]
-player1 =Person("Player1: ",460,65,60,34,player_magic,player_item)
-player2 =Person("Player2: ",460,65,60,34,player_magic,player_item)
-player3 =Person("Player3: ",460,65,60,34,player_magic,player_item)
+player1 =Person("Player1: ",100,132,60,34,player_magic,player_item)
+player2 =Person("Player2: ",460,188,60,34,player_magic,player_item)
+player3 =Person("Player3: ",460,174,60,34,player_magic,player_item)
 players= [player1,player2,player3]
-enemy=Person("Final BOSS: ",1200,65,45,25,[],[])
+enemy=Person("Final BOSS: ",1200,100,100,25,[],[])
 
 
 
@@ -42,7 +42,7 @@ print(bcolors.FAIL +bcolors.BOLD + "An enemy Attacks!" +bcolors.ENDC)
 while running:
      print("===============")
      print(
-         "NAME                               HP                                                                                               MP")
+         "NAME                               HP                                                                                                    MP")
      for player in players:
          player.get_stats()
      for player in players:
