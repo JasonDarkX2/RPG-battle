@@ -96,14 +96,36 @@ class Person:
             mp_ticks-=1
         while len(mp_bar) < 10:
                 mp_bar += " "
-        while len(hp_bar) <25:
-            hp_bar +=" "
-        hp_diff = len(str(self.maxhp)) - len(str(self.hp))+1
+        bar_diff=25-len(hp_bar)
+        fill='█'
+        if bar_diff ==25:
+            bar_diff=75
+            fill = ' '
+            hp_bar = ' '
+        print(bar_diff)
+
+        hpts_diff = len(str(self.maxhp)) - len(str(self.hp))+3
         print(
-        "                                         ________________________________                                _____________")
+        "                                         ________________________________                               _____________")
         print(
-                    self.name + bcolors.BOLD + "         "+str(self.hp).rjust(hp_diff,'0')+"/"+ str(self.maxhp) + bcolors.ENDC +
-                    "|" + bcolors.OKGREEN + hp_bar + bcolors.ENDC + "|" +
-                    bcolors.BOLD + "               "+ str(self.mp)+"/"+ str(self.maxmp) + bcolors.ENDC + "|" + bcolors.OKBLUE + mp_bar + bcolors.ENDC + "|")
+                    self.name
+                    + bcolors.BOLD
+                    + "         "
+                    +str(self.hp).rjust(hpts_diff,' ')
+                    +"/"
+                    + str(self.maxhp)
+                    + bcolors.ENDC +
+                    "|"
+                    + bcolors.OKGREEN
+                    + hp_bar
+                    + bcolors.ENDC
+                    + "|".rjust(bar_diff, fill) +
+                    bcolors.BOLD
+                    + "               "
+                    + str(self.mp)+"/"
+                    + str(self.maxmp) + bcolors.ENDC
+                    + "|" + bcolors.OKBLUE
+                    + mp_bar
+                    + bcolors.ENDC + "|")
 
 
