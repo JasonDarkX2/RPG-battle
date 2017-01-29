@@ -94,17 +94,21 @@ class Person:
         while mp_ticks  > 0:
             mp_bar += "█"
             mp_ticks-=1
-        while len(mp_bar) < 10:
-                mp_bar += " "
-        bar_diff=25-len(hp_bar)
-        fill='█'
-        if bar_diff ==25:
-            bar_diff=75
-            fill = ' '
+        hpbar_diff=25-len(hp_bar)+1
+        hpfill='█'
+        if hpbar_diff ==26:
+            hpbar_diff=75
+            hpfill = ' '
             hp_bar = ' '
-        print(bar_diff)
-
+        print( str(hpbar_diff))
+        mpbar_diff= 10- len(mp_bar)+1
+        mpfill= '█'
+        if mpbar_diff ==11:
+            mpbar_diff=50
+            mpfill=''
+            mp_bar=''
         hpts_diff = len(str(self.maxhp)) - len(str(self.hp))+3
+        mpts_diff = len(str(self.maxmp)) - len(str(self.mp)) + 3
         print(
         "                                         ________________________________                               _____________")
         print(
@@ -119,13 +123,18 @@ class Person:
                     + bcolors.OKGREEN
                     + hp_bar
                     + bcolors.ENDC
-                    + "|".rjust(bar_diff, fill) +
+                    + "|".rjust(hpbar_diff, hpfill) +
                     bcolors.BOLD
                     + "               "
-                    + str(self.mp)+"/"
-                    + str(self.maxmp) + bcolors.ENDC
-                    + "|" + bcolors.OKBLUE
+                    + str(self.mp).rjust(mpts_diff,' ')+
+                    "/"
+                    + str(self.maxmp)
+                    + bcolors.ENDC
+                    + "|"
+                    +bcolors.OKBLUE
                     + mp_bar
-                    + bcolors.ENDC + "|")
+                    + bcolors.ENDC
+                    + "|".rjust(mpbar_diff, mpfill)
+                    )
 
 
