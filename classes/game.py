@@ -100,7 +100,6 @@ class Person:
             hpbar_diff=75
             hpfill = ' '
             hp_bar = ' '
-        print( str(hpbar_diff))
         mpbar_diff= 10- len(mp_bar)+1
         mpfill= '█'
         if mpbar_diff ==11:
@@ -136,5 +135,34 @@ class Person:
                     + bcolors.ENDC
                     + "|".rjust(mpbar_diff, mpfill)
                     )
+    def get_enemy_stats(self):
+        hp_bar = ""
+        hpfill = "█"
+        bar_ticks = (self.hp / self.maxhp) * 100 / 2
+        while bar_ticks  > 0:
+            hp_bar += "█"
+            bar_ticks-=1
+        hpbar_diff = 50 - len(hp_bar) + 1
+        if hpbar_diff== 51:
+            hpbar_diff=160
+            hpfill = " "
+            hp_bar=""
+        hpts_diff = len(str(self.maxhp)) - len(str(self.hp)) + 3
+        print(
+            "                                   _________________________________________________________________")
+        print(
+            self.name
+            + bcolors.BOLD
+            + "         "
+            + str(self.hp).rjust(hpts_diff, ' ')
+            + "/"
+            + str(self.maxhp)
+            + bcolors.ENDC +
+            "|"
+            + bcolors.FAIL
+            + hp_bar
+            + bcolors.ENDC
+            + "|".rjust(hpbar_diff, hpfill) )
+
 
 
