@@ -27,18 +27,19 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
                           {"item": superPotion, "qty": 5}, {"item":elixer,"qty": 5},
                           {"item":highElixer, "qty":5},{"item":grenade, "qty": 2}
                          ]
-player1 =Person("Player1: ",100,132,60,34,player_magic,player_item)
-player2 =Person("Player2: ",460,188,60,34,player_magic,player_item)
-player3 =Person("Player3: ",460,174,60,34,player_magic,player_item)
+player1 =Person("Player1: ",1000,132,60,34,player_magic,player_item)
+player2 =Person("Player2: ",4600,188,60,34,player_magic,player_item)
+player3 =Person("Player3: ",4600,174,60,34,player_magic,player_item)
 players= [player1,player2,player3]
-enemy=Person("Final BOSS: ",1200,100,100,25,[],[])
+enemy=Person(" BOSS: ",1000
+             ,100,20,25,[],[])
 
 
 
 running =True
 i=0
 print(bcolors.FAIL +bcolors.BOLD + "An enemy Attacks!" +bcolors.ENDC)
-
+enemy.get_enemy_stats()
 while running:
      print("===============")
      print(
@@ -105,7 +106,7 @@ while running:
      enemy_dmg = enemy.generate_damage()
      player1.take_damage(enemy_dmg)
      print("Enemy attack dealt", enemy_dmg, "points of damage" )
-     print("enemy HP: "+bcolors.FAIL +str(enemy.hp)+ bcolors.ENDC+"/" + bcolors.FAIL + str(enemy.maxhp)+ bcolors.ENDC)
+     enemy.get_enemy_stats()
      if enemy.get_hp() == 0:
          print(bcolors.OKGREEN +"You Win!!" +bcolors.ENDC)
          running=False
