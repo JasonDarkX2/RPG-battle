@@ -31,7 +31,6 @@ player1 =Person("Player1: ",1000,132,60,34,player_magic,player_item)
 player2 =Person("Player2: ",4600,188,60,34,player_magic,player_item)
 player3 =Person("Player3: ",4600,174,60,34,player_magic,player_item)
 players= [player1,player2,player3]
-enemy=Person(" BOSS: ",1000
              ,100,20,25,[],[])
 
 

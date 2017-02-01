@@ -108,8 +108,9 @@ class Person:
             mp_bar=''
         hpts_diff = len(str(self.maxhp)) - len(str(self.hp))+3
         mpts_diff = len(str(self.maxmp)) - len(str(self.mp)) + 3
+        alignment= (len(str(self.maxhp))*2)+len(self.name)
         print(
-        "                                         ________________________________                               _____________")
+        "                                             ________________________________                                _____________")
         print(
                     self.name
                     + bcolors.BOLD
@@ -148,8 +149,9 @@ class Person:
             hpfill = " "
             hp_bar=""
         hpts_diff = len(str(self.maxhp)) - len(str(self.hp)) + 3
+        alignment= 123
         print(
-            "                                   _________________________________________________________________")
+            "________________________________________________________________".rjust(alignment," "))
         print(
             self.name
             + bcolors.BOLD
