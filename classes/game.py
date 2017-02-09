@@ -64,6 +64,18 @@ class Person:
     def get_spell_cost(self, i):
         return self.magic[i]["cost"]
 
+    def choose_target(self,enemies):
+        i=1
+        print("\n" + bcolors.FAIL + bcolors.BOLD + "    TARGET:" + bcolors.ENDC)
+        for enemy in enemies:
+            print ("         "+ str(i) + ".", enemy.name)
+            i+=1
+        choice =input("    Choose Target:")
+        return int(choice) -1
+
+
+
+
     def choose_action(self):
         i = 1
         print( "     "+bcolors.BOLD +self.name + bcolors.ENDC + "\n"+ bcolors.OKBLUE +  bcolors.BOLD + "     ACTION" + bcolors.ENDC)
@@ -149,7 +161,6 @@ class Person:
             hpfill = " "
             hp_bar=""
         hpts_diff = len(str(self.maxhp)) - len(str(self.hp)) + 3
-        alignment= 123
         print(
             "________________________________________________________________".rjust(alignment," "))
         print(
