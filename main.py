@@ -1,6 +1,7 @@
 from classes.game  import  Person, bcolors
 from classes.magic import Spell
 from classes.inventory import Item
+import random
 
 # Instantiating black magic
 fire= Spell("Fire",10, 160,"Black Magic")
@@ -27,13 +28,13 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
                           {"item": superPotion, "qty": 5}, {"item":elixer,"qty": 5},
                           {"item":highElixer, "qty":5},{"item":grenade, "qty": 2}
                          ]
-player1 =Person("Player1: ",1000,132,6000,3400,player_magic,player_item)
-player2 =Person("Player2: ",4600,188,60,34,player_magic,player_item)
-player3 =Person("Player3: ",4600,174,60,34,player_magic,player_item)
+player1 =Person("Player1 ",1000,132,6000,3400,player_magic,player_item)
+player2 =Person("Player2 ",4600,188,60,34,player_magic,player_item)
+player3 =Person("Player3 ",4600,174,60,34,player_magic,player_item)
 players= [player1,player2,player3]
-enemy1=Person("Dragon1:",1250,130,560,325,[],[])
-enemy2=Person("Dragon2: ",1200,100,20,25,[],[])
-enemy3=Person("Dragon3:",1250,130,560,325,[],[])
+enemy1=Person("Dragon1",1250,130,560,325,[],[])
+enemy2=Person("Dragon2 ",1200,100,20,25,[],[])
+enemy3=Person("Dragon3",1250,130,560,325,[],[])
 enemies=[enemy1,enemy2,enemy3]
 
 
@@ -44,7 +45,6 @@ print(bcolors.FAIL +bcolors.BOLD + "An enemy Attacks!" +bcolors.ENDC)
 for enemy in enemies:
     enemy.get_enemy_stats()
 while running:
-     print(str(len(enemies)))
      print("===============")
      print(
          "NAME                               HP                                                                                                    MP")
@@ -121,10 +121,13 @@ while running:
              print("______________________________________")
 
      if len(enemies)>0:
-         enemy_choice = 1
-         enemy_dmg = enemies[0].generate_damage()
-         player1.take_damage(enemy_dmg)
-         print("Enemy attack dealt", enemy_dmg, "points of damage" )
+         enemy_choice= 0 ##random.randrange(0,0)
+         for enemy in enemies:
+             if enemy_choice == 0:
+                 target = random.randrange(0, 3)
+                 enemy_dmg = enemy.generate_damage()
+                 players[target].take_damage(enemy_dmg)
+                 print( enemy. name," attack dealt", enemy_dmg, "points of damage to ", players[target].name )
          for enemy in enemies:
              enemy.get_enemy_stats()
      else:
