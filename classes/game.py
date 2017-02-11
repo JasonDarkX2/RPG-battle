@@ -179,5 +179,17 @@ class Person:
             + bcolors.ENDC
             + "|".rjust(hpbar_diff, hpfill) )
 
+    def enemy_Spell(self):
+        magic_choice = random.randrange(0, len(self.magic))
+        spell = self.magic[magic_choice]
+        magic_dmg = spell.generate_spell_damage()
+        if self.mp==0:
+            return False
+        if self.mp < spell.cost:
+            print(bcolors.FAIL + "\n Not enough Magic points" + bcolors.ENDC)
+            self.enemy_Spell()
+        else:
+            return  spell, magic_dmg
+
 
 
