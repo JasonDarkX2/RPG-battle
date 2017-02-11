@@ -23,6 +23,7 @@ highElixer= Item(" High elixer","elixer", " Fully restore  partys  HP/MP", 90000
 grenade = Item("Grenade", "attack", "deals 500 damage", 500)
 
 # Instantiating people
+enemy_magic=[fire,thunder,blizzard,meteor]
 player_magic = [fire,thunder,blizzard,meteor,cura]
 player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
                           {"item": superPotion, "qty": 5}, {"item":elixer,"qty": 5},
@@ -32,9 +33,9 @@ player1 =Person("Player1 ",1000,132,6000,3400,player_magic,player_item)
 player2 =Person("Player2 ",4600,188,60,34,player_magic,player_item)
 player3 =Person("Player3 ",4600,174,60,34,player_magic,player_item)
 players= [player1,player2,player3]
-enemy1=Person("Dragon1",1250,130,560,325,[],[])
-enemy2=Person("Dragon2 ",1200,100,20,25,[],[])
-enemy3=Person("Dragon3",1250,130,560,325,[],[])
+enemy1=Person("Dragon1",1250,130,560,325,enemy_magic,[])
+enemy2=Person("Dragon2 ",1200,100,20,25,enemy_magic,[])
+enemy3=Person("Dragon3",1250,130,560,325,enemy_magic,[])
 enemies=[enemy1,enemy2,enemy3]
 
 
@@ -121,19 +122,27 @@ while running:
              print("______________________________________")
 
      if len(enemies)>0:
-         enemy_choice= 0 ##random.randrange(0,0)
+         enemy_choice= random.randrange(0,1)
          for enemy in enemies:
              if enemy_choice == 0:
                  target = random.randrange(0, 3)
                  enemy_dmg = enemy.generate_damage()
                  players[target].take_damage(enemy_dmg)
                  print( enemy. name," attack dealt", enemy_dmg, "points of damage to ", players[target].name )
+             elif enemy_choice ==1:
+                 spell=enemy.enemy_Spell()
+                 target = random.randrange(0, 3)
+                 players[target].take_damage(spell[1])
+                 print(enemy.name,  spell[0].name+ " spell dealt", spell[1], "points of damage to ", players[target].name)
+
          for enemy in enemies:
              enemy.get_enemy_stats()
      else:
+
+            ## player win
             print(bcolors.OKGREEN + "You Win!!" + bcolors.ENDC)
             running = False
-
+#check if players lost
 defeated_players =0
 for player in players:
         if player.get_hp() ==0:
