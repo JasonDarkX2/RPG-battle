@@ -186,10 +186,19 @@ class Person:
         if self.mp==0:
             return False
         if self.mp < spell.cost:
-            print(bcolors.FAIL + "\n Not enough Magic points" + bcolors.ENDC)
             self.enemy_Spell()
         else:
+            self.mp-= spell.cost
             return  spell, magic_dmg
 
-
-
+    def enemy_item(self):
+        if len(self.item)==0:
+            return False
+        item_choice = random.randrange(0, len(self.item))
+        if self.item[item_choice]["qty"] ==0:
+            del self.item[item_choice]
+            self.enemy_item()
+        else:
+            item = self.item[item_choice]["item"]
+            item_dmg= item.prop
+            return item, item_dmg, item_choice
