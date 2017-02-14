@@ -21,6 +21,7 @@ superPotion= Item(" Super Potion","potion", "heals 500 HP", 500)
 elixer= potion= Item("Elixer","elixer", " Fully restore one party member  HP/MP", 50000)
 highElixer= Item(" High elixer","elixer", " Fully restore  partys  HP/MP", 90000)
 grenade = Item("Grenade", "attack", "deals 500 damage", 500)
+sentry = Item("Sentry", "attack", "deals 500 damage", 1000)
 
 # Instantiating people
 enemy_magic=[fire,thunder,blizzard,meteor]
@@ -29,8 +30,9 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
                           {"item": superPotion, "qty": 5}, {"item":elixer,"qty": 5},
                           {"item":highElixer, "qty":5},{"item":grenade, "qty": 2}
                          ]
-enemy_item=[{"item":grenade, "qty": 2},
-            {"item": grenade, "qty": 3}]
+enemy_item=[{"item":grenade, "qty": 1},
+                            {"item":sentry, "qty":1}
+                        ]
 player1 =Person("Player1 ",1000,132,600,340,player_magic,player_item)
 player2 =Person("Player2 ",4600,188,60,34,player_magic,player_item)
 player3 =Person("Player3 ",4600,174,60,34,player_magic,player_item)
@@ -128,9 +130,7 @@ while running:
          for enemy in enemies:
              if enemy_choice == 0:
                  target = random.randrange(0, 3)
-                 enemy_dmg = enemy.generate_damage()
-                 players[target].take_damage(enemy_dmg)
-                 print( enemy. name," attack dealt", enemy_dmg, "points of damage to ", players[target].name )
+                 enemy.enemy_atk(players)
              elif enemy_choice ==1:
                  spell=enemy.enemy_Spell()
                  target = random.randrange(0, 3)
@@ -140,14 +140,15 @@ while running:
                  if len(enemy.item)!=0:
                      item_choice=enemy.enemy_item()
                      target = random.randrange(0, 3)
-                     players[target].take_damage(item_choice[1])
-                     print(enemy.name,  item_choice[0].name+ " dealt", item_choice[1], "points of damage to ", players[target].name)
-                     enemy.item[item_choice[2]]["qty"] -= 1
+                     if(item_choice==False):
+                         enemy.enemy_atk(players)
+                     else:
+                         players[target].take_damage(item_choice[1])
+                         print(enemy.name,  item_choice[0].name+ " dealt", item_choice[1], "points of damage to ", players[target].name)
+                         enemy.item[item_choice[2]]["qty"] -= 1
              else:
-                 target = random.randrange(0, 3)
-                 enemy_dmg = enemy.generate_damage()
-                 players[target].take_damage(enemy_dmg)
-                 print(enemy.name, " attack dealt", enemy_dmg, "points of damage to ", players[target].name)
+                 enemy.enemy_atk(players)
+
          for enemy in enemies:
              enemy.get_enemy_stats()
      else:
