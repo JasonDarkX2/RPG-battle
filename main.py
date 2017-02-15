@@ -36,11 +36,11 @@ enemy_item=[{"item":grenade, "qty": 1},
 player1 =Person("Player1 ",1000,132,600,340,player_magic,player_item)
 player2 =Person("Player2 ",4600,188,60,34,player_magic,player_item)
 player3 =Person("Player3 ",4600,174,60,34,player_magic,player_item)
-players= [player1,player2,player3]
-enemy1=Person("Dragon1",1250,130,560,325,enemy_magic,enemy_item)
+players= [player1]
+enemy1=Person("Dragon1",1250,130,5600,3250,enemy_magic,enemy_item)
 enemy2=Person("Dragon2 ",1200,100,20,25,enemy_magic,enemy_item)
 enemy3=Person("Dragon3",1250,130,560,325,enemy_magic,enemy_item)
-enemies=[enemy1,enemy2,enemy3]
+enemies=[enemy1]
 
 
 
@@ -125,45 +125,32 @@ while running:
                          del enemies[enemy]
              print("______________________________________")
 
-     if len(enemies)>0:
-         enemy_choice= 2 ##random.randrange(0,2)
+     if len(enemies)!=0:
+         enemy_choice= 1 ##random.randrange(0,2)
          for enemy in enemies:
              if enemy_choice == 0:
-                 target = random.randrange(0, 3)
                  enemy.enemy_atk(players)
              elif enemy_choice ==1:
-                 spell=enemy.enemy_Spell()
-                 target = random.randrange(0, 3)
-                 players[target].take_damage(spell[1])
-                 print(enemy.name,  spell[0].name+ " spell dealt", spell[1], "points of damage to ", players[target].name)
-             elif enemy_choice ==2:
-                 if len(enemy.item)!=0:
-                     item_choice=enemy.enemy_item()
-                     target = random.randrange(0, 3)
-                     if(item_choice==False):
-                         enemy.enemy_atk(players)
-                     else:
-                         players[target].take_damage(item_choice[1])
-                         print(enemy.name,  item_choice[0].name+ " dealt", item_choice[1], "points of damage to ", players[target].name)
-                         enemy.item[item_choice[2]]["qty"] -= 1
-             else:
-                 enemy.enemy_atk(players)
+                enemy.enemy_Spell(players)
+             elif enemy_choice== 2:
+                 enemy.enemy_Item(players)
+
+
 
          for enemy in enemies:
              enemy.get_enemy_stats()
-     else:
-
-            ## player win
-            print(bcolors.OKGREEN + "You Win!!" + bcolors.ENDC)
-            running = False
-#check if players lost
-defeated_players =0
-for player in players:
-        if player.get_hp() ==0:
-            defeated_players +=1
-        if defeated_players ==2:
+     ## player win
+     if len(enemies) == 0:
+         print(bcolors.OKGREEN + "You Win!!" + bcolors.ENDC)
+         running = False
+      ## player lose
+     defeated_players = 0
+     for player in players:
+         if player.get_hp() == 0:
+             defeated_players += 1
+         if defeated_players == len(players):
              print(bcolors.FAIL + "You  have been defeated >.<" + bcolors.ENDC)
-             running= False
+             running = False
 
 
 
