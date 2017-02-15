@@ -179,34 +179,31 @@ class Person:
             + bcolors.ENDC
             + "|".rjust(hpbar_diff, hpfill) )
 
-    def enemy_Spell(self):
+    def enemy_Spell(self,players):
+
         magic_choice = random.randrange(0, len(self.magic))
         spell = self.magic[magic_choice]
         magic_dmg = spell.generate_spell_damage()
         if self.mp==0:
+            self.enemy_atk(players)
             return False
         if self.mp < spell.cost:
             self.enemy_Spell()
         else:
             self.mp-= spell.cost
-            return  spell, magic_dmg
+            target = random.randrange(0, len(players))
+            players[target].take_damage(magic_dmg)
+            print(self.name,  spell.name +" attack dealt ", magic_dmg, " points of damage to ", players[target].name)
 
-    def enemy_item(self):
+    def enemy_item(self,players):
         if len(self.item)==0:
+            self.enemy_atk(players)
             return False
-        item_choice = random.randrange(0, len(self.item))
-        if self.item[item_choice]["qty"] ==0:
-            del self.item[item_choice]
-            if len(self.item)!=0:
-                self.enemy_item()
-            else:
-                return False
-        else:
-            item = self.item[item_choice]["item"]
-            item_dmg= item.prop
-            return item, item_dmg, item_choice
+
+
+
     def enemy_atk(self,players):
-        target = random.randrange(0, 3)
+        target = random.randrange(0, len(players))
         enemy_dmg = self.generate_damage()
         players[target].take_damage(enemy_dmg)
         print(self.name, " attack dealt", enemy_dmg, "points of damage to ", players[target].name)
