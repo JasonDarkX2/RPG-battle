@@ -1,4 +1,6 @@
 from classes.game  import  Person, bcolors
+from classes.enemy import Enemy
+from classes.player import Player
 from classes.magic import Spell
 from classes.inventory import Item
 import random
@@ -33,13 +35,13 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
 enemy_item=[{"item":grenade, "qty": 1},
                             {"item":sentry, "qty":1}
                         ]
-player1 =Person("Player1 ",1000,132,600,340,player_magic,player_item)
-player2 =Person("Player2 ",4600,188,60,34,player_magic,player_item)
-player3 =Person("Player3 ",4600,174,60,34,player_magic,player_item)
+player1 =Player("Player1 ",1000,132,600,340,player_magic,player_item)
+player2 =Player("Player2 ",4600,188,60,34,player_magic,player_item)
+player3 =Player("Player3 ",4600,174,60,34,player_magic,player_item)
 players= [player1]
-enemy1=Person("Dragon1",1250,130,5600,3250,enemy_magic,enemy_item)
-enemy2=Person("Dragon2 ",1200,100,20,25,enemy_magic,enemy_item)
-enemy3=Person("Dragon3",1250,130,560,325,enemy_magic,enemy_item)
+enemy1=Enemy("Dragon1",1250,130,5600,3250,enemy_magic,enemy_item)
+enemy2=Enemy("Dragon2 ",1200,100,20,25,enemy_magic,enemy_item)
+enemy3=Enemy("Dragon3",1250,130,560,325,enemy_magic,enemy_item)
 enemies=[enemy1]
 
 
