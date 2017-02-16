@@ -21,7 +21,7 @@ superPotion= Item(" Super Potion","potion", "heals 500 HP", 500)
 elixer= potion= Item("Elixer","elixer", " Fully restore one party member  HP/MP", 50000)
 highElixer= Item(" High elixer","elixer", " Fully restore  partys  HP/MP", 90000)
 grenade = Item("Grenade", "attack", "deals 500 damage", 500)
-sentry = Item("Sentry", "attack", "deals 500 damage", 1000)
+sentry = Item("Sentry", "attack", "deals 800 damage", 800)
 
 # Instantiating people
 enemy_magic=[fire,thunder,blizzard,meteor]
@@ -126,14 +126,14 @@ while running:
              print("______________________________________")
 
      if len(enemies)!=0:
-         enemy_choice= 1 ##random.randrange(0,2)
+         enemy_choice= random.randrange(0,2)
          for enemy in enemies:
              if enemy_choice == 0:
                  enemy.enemy_atk(players)
              elif enemy_choice ==1:
                 enemy.enemy_Spell(players)
              elif enemy_choice== 2:
-                 enemy.enemy_Item(players)
+                 enemy.enemy_item(players)
 
 
 
