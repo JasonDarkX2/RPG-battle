@@ -198,7 +198,18 @@ class Person:
     def enemy_item(self,players):
         if len(self.item)==0:
             self.enemy_atk(players)
-            return False
+        else:
+            item_choice=random.randrange(0, len(self.item))
+            if self.item[item_choice]["qty"] == 0:
+                del self.item[item_choice]
+                self.enemy_item()
+            target=random.randrange(0, len(players))
+            item=self.item[item_choice]['item']
+            dmg=item.prop
+            players[target].take_damage(dmg)
+            self.item[item_choice]["qty"]-=1
+            print(self.name,  item.name+ " dealt", str(dmg), "points of damage to ", players[target].name)
+
 
 
 
