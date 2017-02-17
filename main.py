@@ -68,39 +68,9 @@ while running:
              choice = inputt = input("     choose Action :")
              index= int(choice)  - 1
              if index ==0:
-                    dmg=player.generate_damage()
-                    enemy = player.choose_target(enemies)
-                    enemies[enemy].take_damage(dmg)
-                    print (player.name+" attack deals", dmg, "points of damage to "+ enemies[enemy].name)
-                    if enemies[enemy].get_hp() ==0:
-                        print( enemies[enemy].name.replace(" ","") +"has been defeated")
-                        del  enemies[enemy]
+                 player.player_atk(enemies)
              elif  index  ==1 :
-                    player.choose_magic()
-                    magic_choice= int(input("    Choose Magic:"))  - 1
-                    if magic_choice == -1:
-                        continue
-                    spell=  player.magic[magic_choice]
-                    magic_dmg = spell.generate_spell_damage()
-
-
-                    current_mp= player.get_mp()
-                    if spell.cost > current_mp:
-                        print(bcolors.FAIL +"\n Not enough Magic points" +bcolors.ENDC)
-                        continue
-
-                    if spell.type  == "White Magic":
-                        player.heal(magic_dmg)
-                        player.reduce_mp(spell.cost)
-                        print(bcolors.OKBLUE + player.name + spell.name +" heals  " + str(magic_dmg) + "  HP " + bcolors.ENDC )
-                    elif spell.type ==  "Black Magic":
-                        player.reduce_mp(spell.cost)
-                        enemy = player.choose_target(enemies)
-                        enemies[enemy].take_damage(magic_dmg)
-                        print(bcolors.OKBLUE +   player.name+ spell.name + " deals " + str(magic_dmg), " points of damage to " + enemies[enemy].name+ bcolors.ENDC)
-                        if enemies[enemy].get_hp() == 0:
-                            print(enemies[enemy].name.replace(" ", "") + "has been defeated")
-                            del enemies[enemy]
+                 player.player_magic(enemies)
              elif index == 2:
                  player.choose_item()
                  item_choice= int(input( "choose item:" ))  - 1
