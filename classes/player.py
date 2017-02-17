@@ -89,4 +89,41 @@ class Player(Person):
                     + bcolors.ENDC
                     + "|".rjust(mpbar_diff, mpfill)
                     )
+    def player_atk(self, enemy):
+        dmg = self.generate_damage()
+        target = self.choose_target(enemy)
+        enemy[target].take_damage(dmg)
+        print(self.name + " attack deals", dmg, "points of damage to " + enemy[target].name)
+        if enemy[target].get_hp() == 0:
+            print(enemy[target].name.replace(" ", "") + "has been defeated")
+            del enemy[target]
+
+    def player_magic(self, enemy):
+        self.choose_magic()
+        spell=""
+        magic_choice = int(input("    Choose Magic:")) - 1
+        if magic_choice == -1:
+            self.player_magic(enemy)
+        else:
+            spell = self.magic[magic_choice]
+            magic_dmg = spell.generate_spell_damage()
+
+            current_mp = self.get_mp()
+            if spell.cost > current_mp:
+                print(bcolors.FAIL + "Not enough Magic points" + bcolors.ENDC)
+                self.player_magic(enemy)
+
+            if spell.type == "White Magic":
+                self.heal(magic_dmg)
+                self.reduce_mp(spell.cost)
+                print(bcolors.OKBLUE + self.name + spell.name + " heals  " + str(magic_dmg) + "  HP " + bcolors.ENDC)
+            elif spell.type == "Black Magic":
+                self.reduce_mp(spell.cost)
+                target = self.choose_target(enemy)
+                enemy[target].take_damage(magic_dmg)
+                print(bcolors.OKBLUE + self.name + spell.name + " deals " + str(magic_dmg),
+                      " points of damage to " + enemy[target].name + bcolors.ENDC)
+                if enemy[target].get_hp() == 0:
+                    print(enemy[target].name.replace(" ", "") + "has been defeated")
+                    del enemy[target]
 
