@@ -39,7 +39,7 @@ player1 =Player("Player1 ",1000,132,600,340,player_magic,player_item)
 player2 =Player("Player2 ",4600,188,60,34,player_magic,player_item)
 player3 =Player("Player3 ",4600,174,60,34,player_magic,player_item)
 players= [player1]
-enemy1=Enemy("Dragon1",1250,130,5600,3250,enemy_magic,enemy_item)
+enemy1=Enemy("Dragon1",1250,130,560,325,enemy_magic,enemy_item)
 enemy2=Enemy("Dragon2 ",1200,100,20,25,enemy_magic,enemy_item)
 enemy3=Enemy("Dragon3",1250,130,560,325,enemy_magic,enemy_item)
 enemies=[enemy1]
@@ -72,30 +72,8 @@ while running:
              elif  index  ==1 :
                  player.player_magic(enemies)
              elif index == 2:
-                 player.choose_item()
-                 item_choice= int(input( "choose item:" ))  - 1
-                 if item_choice == -1:
-                     continue
-                 item= player.item[item_choice]["item"]
-                 if player.item[item_choice]["qty"] <=0:
-                     print(bcolors.FAIL+ "\n"+" None Left....."+bcolors.ENDC)
-                     continue
-                 player.item[item_choice]["qty"] -= 1
-                 if item.type =="potion":
-                     player.heal(item.prop)
-                     print (bcolors.OKGREEN +"\n" + item.name + " heals " + str(item.prop) + "HP" + bcolors.ENDC)
-                 elif item.type == "elixer":
-                     player.hp= player.maxhp
-                     player.mp =player.maxmp
-                     print(bcolors.OKGREEN + player.name + item.name + " fully restores HP/MP" + bcolors.ENDC)
-                 elif item.type =="attack":
-                     enemy = player.choose_target(enemies)
-                     enemies[enemy].take_damage(item.prop)
-                     print(bcolors.FAIL +player.name+ item.name + "  deals ",str(item.prop) , "points of damage to "+ enemies[enemy].name + bcolors.ENDC)
-                     if enemies[enemy].get_hp() == 0:
-                         print(enemies[enemy].name.replace(" ", "") + "has been defeated")
-                         del enemies[enemy]
-             print("______________________________________")
+                 player.player_item(enemies)
+     print("______________________________________")
 
      if len(enemies)!=0:
          enemy_choice= random.randrange(0,2)
