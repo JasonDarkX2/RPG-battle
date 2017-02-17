@@ -127,3 +127,29 @@ class Player(Person):
                     print(enemy[target].name.replace(" ", "") + "has been defeated")
                     del enemy[target]
 
+    def player_item(self,enemy):
+            self.choose_item()
+            item_choice = int(input("choose item:")) - 1
+            if item_choice == -1:
+                self.player_item(enemy)
+            item = self.item[item_choice]["item"]
+            if self.item[item_choice]["qty"] <= 0:
+                print(bcolors.FAIL  + " None Left....." + bcolors.ENDC)
+            else:
+                self.item[item_choice]["qty"] -= 1
+                if item.type == "potion":
+                    self.heal(item.prop)
+                    print(bcolors.OKGREEN + "\n" + item.name + " heals " + str(item.prop) + "HP" + bcolors.ENDC)
+                elif item.type == "elixer":
+                    self.hp = self.maxhp
+                    self.mp = self.maxmp
+                    print(bcolors.OKGREEN + self.name + item.name + " fully restores HP/MP" + bcolors.ENDC)
+                elif item.type == "attack":
+                    target = self.choose_target(enemy)
+                    enemy[target].take_damage(item.prop)
+                    print(bcolors.FAIL + self.name + item.name + "  deals ", str(item.prop),
+                          "points of damage to " + enemy[target].name + bcolors.ENDC)
+                    if enemy[target].get_hp() == 0:
+                        print(enemy[target].name.replace(" ", "") + "has been defeated")
+                        del enemy[target]
+
