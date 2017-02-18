@@ -35,7 +35,7 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
 enemy_item=[{"item":grenade, "qty": 1},
                             {"item":sentry, "qty":1}
                         ]
-player1 =Player("Player1 ",1000,132,600,340,player_magic,player_item)
+player1 =Player("Player1 ",1000,2,600,340,player_magic,player_item)
 player2 =Player("Player2 ",4600,188,60,34,player_magic,player_item)
 player3 =Player("Player3 ",4600,174,60,34,player_magic,player_item)
 players= [player1]
@@ -64,15 +64,22 @@ while running:
          if player.get_hp()==0:
              continue
          else:
-             player.choose_action()
-             choice = inputt = input("     choose Action :")
-             index= int(choice)  - 1
-             if index ==0:
-                 player.player_atk(enemies)
-             elif  index  ==1 :
-                 player.player_magic(enemies)
-             elif index == 2:
-                 player.player_item(enemies)
+             invalid=True
+             while invalid :
+                 player.choose_action()
+                 choice = inputt = input("     choose Action :")
+                 index= int(choice)  - 1
+                 if index ==0:
+                     player.player_atk(enemies)
+                 elif  index  ==1 :
+                     if player.get_mp()<player.lowest_mp_cost():
+                         print(bcolors.FAIL + "    Not enough Magic points" + bcolors.ENDC)
+                         invalid=True
+                     else:
+                         player.player_magic(enemies)
+                         invalid=False
+                 elif index == 2:
+                     player.player_item(enemies)
      print("______________________________________")
 
      if len(enemies)!=0:
