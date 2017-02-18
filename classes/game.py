@@ -64,3 +64,8 @@ class Person:
     def get_spell_cost(self, i):
         return self.magic[i]["cost"]
 
+    def lowest_mp_cost(self):
+        for spell in self.magic:
+            if spell.cost<lowest:
+                lowest=spell.cost
+        return lowest
