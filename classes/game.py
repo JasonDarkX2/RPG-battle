@@ -65,6 +65,7 @@ class Person:
         return self.magic[i]["cost"]
 
     def lowest_mp_cost(self):
+        lowest=9001 #over nine thousand! >.<
         for spell in self.magic:
             if spell.cost<lowest:
                 lowest=spell.cost
