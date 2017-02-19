@@ -35,7 +35,7 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
 enemy_item=[{"item":grenade, "qty": 1},
                             {"item":sentry, "qty":1}
                         ]
-player1 =Player("Player1 ",1000,2,600,340,player_magic,player_item)
+player1 =Player("Player1 ",1000,2,600,340,player_magic,[])
 player2 =Player("Player2 ",4600,188,60,34,player_magic,player_item)
 player3 =Player("Player3 ",4600,174,60,34,player_magic,player_item)
 players= [player1]
@@ -79,7 +79,12 @@ while running:
                          player.player_magic(enemies)
                          invalid=False
                  elif index == 2:
-                     player.player_item(enemies)
+                     if len (player.item)==0:
+                         print(bcolors.FAIL + "    No items in inventory" + bcolors.ENDC)
+                         invlaid=True
+                     else:
+                         player.player_item(enemies)
+                         invalid=False
      print("______________________________________")
 
      if len(enemies)!=0:
