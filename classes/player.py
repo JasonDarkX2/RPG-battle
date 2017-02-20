@@ -33,9 +33,10 @@ class Player(Person):
     def choose_item(self):
         i = 1
         print( "     "+bcolors.BOLD +self.name + bcolors.ENDC + "\n"+ bcolors.OKGREEN + "      ITEMS" + bcolors.ENDC)
-        for item in self.item:
+        for  item in self.item:
             print("         "+str(i) + ":", item["item"].name, ":", item["item"].description, "(x"+str(item["qty"])+ ")")
             i += 1
+
     def get_stats( self):
         hp_bar=""
         mp_bar=""
@@ -128,28 +129,35 @@ class Player(Person):
                     del enemy[target]
 
     def player_item(self,enemy):
+            invalid =False
             self.choose_item()
             item_choice = int(input("choose item:")) - 1
-            if item_choice == -1:
+            if item_choice>=len(self.item) or item_choice<0 :
                 self.player_item(enemy)
-            item = self.item[item_choice]["item"]
-            if self.item[item_choice]["qty"] <= 0:
-                print(bcolors.FAIL  + " None Left....." + bcolors.ENDC)
             else:
-                self.item[item_choice]["qty"] -= 1
-                if item.type == "potion":
-                    self.heal(item.prop)
-                    print(bcolors.OKGREEN + "\n" + item.name + " heals " + str(item.prop) + "HP" + bcolors.ENDC)
-                elif item.type == "elixer":
-                    self.hp = self.maxhp
-                    self.mp = self.maxmp
-                    print(bcolors.OKGREEN + self.name + item.name + " fully restores HP/MP" + bcolors.ENDC)
-                elif item.type == "attack":
-                    target = self.choose_target(enemy)
-                    enemy[target].take_damage(item.prop)
-                    print(bcolors.FAIL + self.name + item.name + "  deals ", str(item.prop),
-                          "points of damage to " + enemy[target].name + bcolors.ENDC)
-                    if enemy[target].get_hp() == 0:
-                        print(enemy[target].name.replace(" ", "") + "has been defeated")
-                        del enemy[target]
+                print( str(len(self.item)))
+                item = self.item[item_choice]["item"]
+                if self.item[item_choice]["qty"] <= 0:
+                    print(bcolors.FAIL  + " None Left....." + bcolors.ENDC)
+                    del self.item[item_choice]
+                    self.player_item(enemy)
+                else:
+                    self.item[item_choice]["qty"] -= 1
+                    if item.type == "potion":
+                        self.heal(item.prop)
+                        print(bcolors.OKGREEN + "\n" + item.name + " heals " + str(item.prop) + "HP" + bcolors.ENDC)
+                    elif item.type == "elixer":
+                        self.hp = self.maxhp
+                        self.mp = self.maxmp
+                        print(bcolors.OKGREEN + self.name + item.name + " fully restores HP/MP" + bcolors.ENDC)
+                    elif item.type == "attack":
+                        target = self.choose_target(enemy)
+                        enemy[target].take_damage(item.prop)
+                        print(bcolors.FAIL + self.name + item.name + "  deals ", str(item.prop),
+                              "points of damage to " + enemy[target].name + bcolors.ENDC)
+                        if self.item[item_choice]["qty"]==0:
+                            del self.item[item_choice]
+                        if enemy[target].get_hp() == 0:
+                            print(enemy[target].name.replace(" ", "") + "has been defeated")
+                            del enemy[target]
 
