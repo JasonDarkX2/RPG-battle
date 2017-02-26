@@ -42,7 +42,7 @@ players= [player1]
 enemy1=Enemy("Dragon1",1250,130,560,325,enemy_magic,enemy_item)
 enemy2=Enemy("Dragon2 ",1200,100,20,25,enemy_magic,enemy_item)
 enemy3=Enemy("Dragon3",1250,130,560,325,enemy_magic,enemy_item)
-enemies=[enemy1]
+enemies=[enemy1,enemy2]
 
 
 
@@ -54,7 +54,7 @@ for enemy in enemies:
 while running:
      print("===============")
      print(
-         "NAME                               HP                                                                                                    MP")
+         "NAME                       HP                                                                MP")
      for player in players:
          player.get_stats()
      for player in players:
@@ -71,6 +71,7 @@ while running:
                  index= int(choice)  - 1
                  if index ==0:
                      player.player_atk(enemies)
+                     invalid=False
                  elif  index  ==1 :
                      if player.get_mp()<player.lowest_mp_cost():
                          print(bcolors.FAIL + "    Not enough Magic points" + bcolors.ENDC)
@@ -87,7 +88,7 @@ while running:
                          invalid=False
      print("______________________________________")
 
-     if len(enemies)!=0:
+     if len(enemies)>0:
          enemy_choice= random.randrange(0,2)
          for enemy in enemies:
              if enemy_choice == 0:
