@@ -64,7 +64,7 @@ class Player(Person):
         mpts_diff = len(str(self.maxmp)) - len(str(self.mp)) + 3
         alignment= (len(str(self.maxhp))*2)+len(self.name)
         print(
-        "                                             ________________________________                                _____________")
+        "                           ___________________________________________                      _________________")
         print(
                     self.name
                     + bcolors.BOLD

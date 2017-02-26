@@ -19,9 +19,9 @@ class Enemy(Person):
             hpfill = " "
             hp_bar = ""
         hpts_diff = len(str(self.maxhp)) - len(str(self.hp)) + 3
-        alignment = 111
+        alignment = 112
         print(
-            "________________________________________________________________".rjust(alignment, " "))
+            "______________________________________________________________________________________".rjust(alignment, " "))
         print(
             self.name
             + bcolors.BOLD
