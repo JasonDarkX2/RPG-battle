@@ -32,12 +32,12 @@ player_item =[{"item":potion,"qty": 15},{"item":highPotion, "qty":5},
                           {"item": superPotion, "qty": 5}, {"item":elixer,"qty": 5},
                           {"item":highElixer, "qty":5},{"item":grenade, "qty": 2}
                          ]
-enemy_item=[{"item":grenade, "qty": 1},
-                            {"item":sentry, "qty":1}
+enemy_item=[{"item":grenade, "qty": 3},
+                            {"item":sentry, "qty":3}
                         ]
-player1 =Player("Player1 ",1000,2,600,340,player_magic,[])
-player2 =Player("Player2 ",4600,188,60,34,player_magic,player_item)
-player3 =Player("Player3 ",4600,174,60,34,player_magic,player_item)
+player1 =Player("Player1 ",1600,160,600,340,player_magic,[])
+player2 =Player("Player2 ",1400,188,60,34,player_magic,player_item)
+player3 =Player("Player3 ",1200,174,60,34,player_magic,player_item)
 players= [player1]
 enemy1=Enemy("Dragon1",1250,130,560,325,enemy_magic,enemy_item)
 enemy2=Enemy("Dragon2 ",1200,100,20,25,enemy_magic,enemy_item)
